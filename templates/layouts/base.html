@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Meta -->
+    <meta name="description" content="Blockchain Project">
+    <meta name="author" content="ghosteye">
+
+    <title>Task Management System</title>
+
+    <!-- vendor css -->
+    <link href="{% static 'assets/lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/lib/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/lib/rickshaw/rickshaw.min.css' %}" rel="stylesheet">
+
+    <!-- Starlight CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/starlight.css' %}">
+  </head>
+  <body>
+
+    <section id="container">
+      {% include 'layouts/navbar.html' %}
+      {% include 'layouts/sidebar.html' %}
+      <!--main content start-->
+      <section id="main-content">
+        <section class="wrapper">
+          <div class="row">
+            
+            {% block body_block %}
+              
+            {% endblock body_block %}
+              
+          </div>
+          <!-- /row -->
+        </section>
+      </section>
+      <!--main content end-->
+  
+    </section>
+    
+
+  <script src="{% static 'assets/lib/jquery/jquery.js' %}"></script>
+  <script src="{% static 'assets/lib/popper.js/popper.js' %}"></script>
+  <script src="{% static 'assets/lib/bootstrap/bootstrap.js' %}"></script>
+  <script src="{% static 'assets/lib/jquery-ui/jquery-ui.js' %}"></script>
+  <script src="{% static 'assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js' %}"></script>
+  <script src="{% static 'assets/lib/jquery.sparkline.bower/jquery.sparkline.min.js' %}"></script>
+  <script src="{% static 'assets/d3/d3.js' %}"></script>
+  <script src="{% static 'assets/lib/rickshaw/rickshaw.min.js' %}"></script>
+  <script src="{% static 'assets/lib/chart.js/Chart.js' %}"></script>
+  <script src="{% static 'assets/lib/Flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'assets/Flot/jquery.flot.pie.js' %}"></script>
+  <script src="{% static 'assets/lib/Flot/jquery.flot.resize.js' %}"></script>
+  <script src="{% static 'lib/flot-spline/jquery.flot.spline.js' %}"></script>
+  <script src="{% static 'assets/js/starlight.js' %}"></script>
+  <script src="{% static 'assets/js/ResizeSensor.js' %}"></script>
+  <script src="{% static 'assets/js/dashboard.js' %}"></script>
+
+</body>
+</html>
