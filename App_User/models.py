@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     address = models.TextField(max_length=255, blank=True, null=True)
     bio = models.TextField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_manager = models.BooleanField(default=False)
 
