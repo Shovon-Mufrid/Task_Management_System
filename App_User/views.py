@@ -27,11 +27,11 @@ def user_logout(request):
     logout(request)
     return redirect('App_User:login')
 
-@login_required(login_url='login')
+@login_required
 def home(request):
     return render(request, 'App_User/home.html')
 
-@login_required(login_url='login')
+@login_required
 def profile(request):
     user = request.user
     profile = UserProfile.objects.get(user=user)

@@ -10,7 +10,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>Login - Task Management</title>
+    <title>Login - TMS</title>
 
     <!-- vendor css -->
     <link href="{% static 'assets/lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
@@ -27,7 +27,7 @@
 
       <form method="POST" action="{% url 'App_User:login' %}" class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
         {% csrf_token %}
-        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse"> <span class="tx-info tx-normal">Login</span></div>
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse mg-b-10"> <span class="tx-info tx-normal">Login</span></div>
         {% if error_message %}
         <!-- <p><strong>{{ error_message }}</strong></p> -->
         <div class="tx-center mg-b-20 text-danger">{{ error_message }}</div>

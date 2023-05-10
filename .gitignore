@@ -1,3 +1,4 @@
 /venv
 /App_User/__pycache__
 /App_Userlog/__pycache__
+/.gitattributes
