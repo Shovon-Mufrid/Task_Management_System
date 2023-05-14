@@ -9,8 +9,8 @@
     <meta name="description" content="Blockchain Project">
     <meta name="author" content="ghosteye">
 
-    <link href="{% static 'img/education.png' %}" rel="icon">
-    <link href="{% static 'img/education.png' %}" rel="favicon">
+    <link href="{% static 'assets/img/task.png' %}" rel="icon">
+    <link href="{% static 'assets/img/task.png' %}" rel="favicon">
 
     <title>TMS</title>
 
@@ -21,7 +21,7 @@
     <link href="{% static 'assets/lib/rickshaw/rickshaw.min.css' %}" rel="stylesheet">
 
     <!-- Starlight CSS -->
-    <link rel="stylesheet" href="{% static 'assets/css/starlight.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
   </head>
   <body>
 
@@ -29,18 +29,24 @@
       {% include 'layouts/navbar.html' %}
       {% include 'layouts/sidebar.html' %}
       <!--main content start-->
-      <section id="main-content">
-        <section class="wrapper">
-          <div class="row">
-            
+      <div class="sl-mainpanel">
+        <nav class="breadcrumb sl-breadcrumb">
+          <a class="breadcrumb-item" href="{% url 'App_User:home' %}">Home</a>
+          <span class="breadcrumb-item active">             
+            {% block span_block %}
+              Dashboard
+            {% endblock span_block %}              
+          </span>
+        </nav>
+  
+        <div class="sl-pagebody">
+
             {% block body_block %}
               
             {% endblock body_block %}
-              
-          </div>
-          <!-- /row -->
-        </section>
-      </section>
+         </div>
+      </div>     
+
       <!--main content end-->
   
     </section>
@@ -59,7 +65,7 @@
   <script src="{% static 'assets/Flot/jquery.flot.pie.js' %}"></script>
   <script src="{% static 'assets/lib/Flot/jquery.flot.resize.js' %}"></script>
   <script src="{% static 'lib/flot-spline/jquery.flot.spline.js' %}"></script>
-  <script src="{% static 'assets/js/starlight.js' %}"></script>
+  <script src="{% static 'assets/js/app.js' %}"></script>
   <script src="{% static 'assets/js/ResizeSensor.js' %}"></script>
   <script src="{% static 'assets/js/dashboard.js' %}"></script>
 

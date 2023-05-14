@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import User
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -15,3 +18,33 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user.username
+
+
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     full_name = models.CharField(max_length=100)
+#     profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
+#     def __str__(self):
+#         return self.user.username
+    
+
+# class Employee(models.Model):
+#     user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+#     address = models.TextField(max_length=255, blank=True, null=True)
+#     phone_number = models.CharField(max_length=20, blank=True, null=True)
+#     is_manager = models.BooleanField(default=False)
+#     is_active = models.BooleanField(default=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.user_profile.user.username

@@ -12006,7 +12006,7 @@ textarea.parsley-success:focus {
   bottom: 0;
   z-index: 100;
   width: 230px;
-  background-color: #fff;
+  background-color: #384250;
   padding: 10px;
   overflow-y: auto;
   transition: all 0.2s ease-in-out;
@@ -12179,15 +12179,15 @@ textarea.parsley-success:focus {
   transition: all 0.2s ease-in-out;
 }
 .sl-menu-sub .nav-link:hover, .sl-menu-sub .nav-link:focus {
-  color: #343a40;
-  background-color: #e9ecef;
+  color: whitesmoke;
+  background-color: #2b333e;
 }
 .sl-menu-sub .nav-link:hover::before, .sl-menu-sub .nav-link:focus::before {
   opacity: 1;
 }
 .sl-menu-sub .nav-link.active {
-  color: #343a40;
-  background-color: #e9ecef;
+  color: whitesmoke;
+  background-color: #2b333e;
 }
 .sl-menu-sub .nav-link.active::before {
   opacity: 1;
