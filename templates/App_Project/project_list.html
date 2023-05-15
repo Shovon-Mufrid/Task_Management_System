@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html' %}
+
+{% block span_block %}
+    Dashboard
+{% endblock span_block %}
+    
+{% block body_block %}
+
+  <h2>Project List</h2>
+  {% if projects %}
+    <ul>
+      {% for project in projects %}
+        <li><a href="{% url 'App_Project:project_detail' project.pk %}">{{ project.name }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No projects found.</p>
+  {% endif %}
+
+{% endblock body_block %}

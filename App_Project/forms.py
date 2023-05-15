@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Task, Employee, Project
+from App_Project.models import Task, Project, EmployeeTask
+from App_User.models import Employee
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -15,7 +16,7 @@ class TaskForm(forms.ModelForm):
 
 class EmployeeTaskForm(forms.ModelForm):
     class Meta:
-        model = Task
+        model = EmployeeTask
         fields = ('employees',)
         widgets = {'employees': forms.CheckboxSelectMultiple}
         

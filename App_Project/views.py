@@ -15,7 +15,7 @@ def project_list(request):
     projects = Project.objects.filter(employees=request.user.employee)
 
     context = {'projects': projects}
-    return render(request, 'project_list.html', context)
+    return render(request, 'App_Project/project_list.html', context)
 
 
 @login_required
@@ -28,7 +28,7 @@ def project_detail(request, pk):
     tasks = Task.objects.filter(project=project)
 
     context = {'project': project, 'tasks': tasks}
-    return render(request, 'project_detail.html', context)
+    return render(request, 'App_Project/project_detail.html', context)
 
 
 @login_required
@@ -44,12 +44,12 @@ def create_project(request):
             project.save()
             form.save_m2m()
             messages.success(request, 'Project created successfully')
-            return redirect('project_detail', pk=project.pk)
+            return redirect('App_Project:project_detail', pk=project.pk)
     else:
         form = ProjectForm()
 
     context = {'form': form}
-    return render(request, 'create_project.html', context)
+    return render(request, 'App_Project/create_project.html', context)
 
 
 @login_required
@@ -64,13 +64,34 @@ def edit_project(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Project updated successfully')
-            return redirect('project_detail', pk=pk)
+            return redirect('App_Project:project_detail', pk=pk)
     else:
         form = ProjectForm(instance=project)
 
     context = {'form': form, 'project': project}
-    return render(request, 'edit_project.html', context)
+    return render(request, 'App_Project/edit_project.html', context)
 
+@login_required
+def delete_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project.delete()
+    messages.success(request, 'Project has been deleted successfully!')
+    return redirect('project_list')
+
+@login_required
+def add_employee_to_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    if request.method == 'POST':
+        form = EmployeeTaskForm(request.POST)
+        if form.is_valid():
+            employee_task = form.save(commit=False)
+            employee_task.project = project
+            employee_task.save()
+            messages.success(request, 'Employee has been added to project successfully!')
+            return redirect('App_Project:project_detail', pk=project.pk)
+    else:
+        form = EmployeeTaskForm()
+    return render(request, 'App_Project/add_employee.html', {'form': form, 'project': project})
 
 @login_required
 def create_task(request, pk):
@@ -87,12 +108,12 @@ def create_task(request, pk):
             task.save()
             form.save_m2m()
             messages.success(request, 'Task created successfully')
-            return redirect('project_detail', pk=pk)
+            return redirect('App_Project:project_detail', pk=pk)
     else:
         form = TaskForm()
 
     context = {'form': form, 'project': project}
-    return render(request, 'create_task.html', context)
+    return render(request, 'App_Project/create_task.html', context)
 
 
 @login_required
@@ -108,12 +129,12 @@ def edit_task(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Task updated successfully')
-            return redirect('project_detail', pk=project.pk)
+            return redirect('App_Project:project_detail', pk=project.pk)
     else:
         form = TaskForm(instance=task)
 
     context = {'form': form, 'project': project, 'task': task}
-    return render(request, 'edit_task.html', context)
+    return render(request, 'App_Project/edit_task.html', context)
 
 
 @login_required
@@ -132,11 +153,28 @@ def assign_task(request, pk):
                 return redirect('project_detail', project.pk)
             else:
                 form = AssignTaskForm()
-            return render(request, 'app_project/assign_task.html', {'form': form, 'task': task})
+            return render(request, 'App_Project/assign_task.html', {'form': form, 'task': task})
         else:
             raise PermissionDenied
 
 
+@login_required
+def delete_task(request, pk):
+    """
+    Allows the admin or project manager to delete a task for a project
+    """
+    task = get_object_or_404(Task, pk=pk)
+    project = task.project
+
+    if request.user.is_superuser or request.user == project.manager:
+        if request.method == 'POST':
+            task.delete()
+            messages.success(request, 'Task deleted successfully')
+            return redirect('App_Project:project_detail', pk=project.pk)
+        else:
+            return render(request, 'App_Project/delete_task.html', {'task': task})
+    else:
+        raise PermissionDenied
 
 
 

@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html' %}
+
+{% block span_block %}
+    Dashboard
+{% endblock span_block %}
+    
+{% block body_block %}
+  <h2>Create Project</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+{% endblock %}
