@@ -4,7 +4,8 @@
 1. Run: git clone https://github.com/Shovon-Mufrid/Task_Management_System.git 
 2. cd Task_Management_System
 3. Run: python -m venv venv
-4. Access venv file using Git Bash: source venv/scripts/activate
+4. Access venv file using Git Bash: source venv/scripts/activate 
+ & 'c:\WORKSTATION\Github\PRIVATE\Task Management\Task_Management_System\venv\Scripts\Activate.ps1'
 5. Run: pip install -r requirements.txt
 6. Run: python manage.py migrate
 7. Run: python manage.py makemigrations

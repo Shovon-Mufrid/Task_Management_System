@@ -3,20 +3,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from .models import Project, Task, EmployeeTask
+from App_User.models import Employee
 from .forms import ProjectForm, TaskForm, EmployeeTaskForm, AssignTaskForm
 from django.core.exceptions import PermissionDenied
+from django.views.generic import CreateView, UpdateView, ListView, DetailView, View, TemplateView, DeleteView
 
+# @login_required
+# def project_list(request):
+#     """
+#     Displays the list of projects for the logged in user
+#     """
+#     projects = Project.objects.filter(employees=request.user.employee)
 
-@login_required
-def project_list(request):
-    """
-    Displays the list of projects for the logged in user
-    """
-    projects = Project.objects.filter(employees=request.user.employee)
+#     context = {'projects': projects}
+#     return render(request, 'App_Project/project_list.html', context)
 
-    context = {'projects': projects}
-    return render(request, 'App_Project/project_list.html', context)
-
+class ProjectList(ListView):
+    context_object_name = 'projects'
+    model = Project
+    template_name = 'App_Project/project_list.html'
+    # queryset = Blog.objects.order_by('-publish_date')
 
 @login_required
 def project_detail(request, pk):
@@ -36,11 +42,14 @@ def create_project(request):
     """
     Allows the admin to create a new project
     """
+    managers = Employee.objects.filter(managed_projects=True)
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
             project.admin = request.user
+            # project.manager = Employee.objects.get(user=request.POST.get('manager'))
+            # project.manager = request.user.employee
             project.save()
             form.save_m2m()
             messages.success(request, 'Project created successfully')
@@ -48,7 +57,7 @@ def create_project(request):
     else:
         form = ProjectForm()
 
-    context = {'form': form}
+    context = {'form': form, 'managers': managers}
     return render(request, 'App_Project/create_project.html', context)
 
 

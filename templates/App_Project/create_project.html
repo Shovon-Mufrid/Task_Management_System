@@ -1,14 +1,26 @@
 {% extends 'layouts/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block span_block %}
-    Dashboard
+    Create Project
 {% endblock span_block %}
     
 {% block body_block %}
-  <h2>Create Project</h2>
-  <form method="post">
+  <div class="card pd-20 pd-sm-40">
+  <h6 class="card-body-title">Create New Project</h6>
+  <p class="mg-b-20 mg-sm-b-30">A form with a label on top of each form control.</p>
+
+  <form action="" method="POST">
+    {{ form|crispy }}
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
+    <br>
+    <button type="submit" class="btn btn-secondary">Create Your Project</button>
   </form>
+  
+  <!-- <div class="form-group mg-b-10-force"></div>
+   {{ form.as_p }}
+  </div> -->
+
+  
+</div>
+
 {% endblock %}

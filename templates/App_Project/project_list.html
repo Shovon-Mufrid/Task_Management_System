@@ -1,20 +1,48 @@
 {% extends 'layouts/base.html' %}
 
 {% block span_block %}
-    Dashboard
+    Project List
 {% endblock span_block %}
-    
+
 {% block body_block %}
+<div class="card pd-20 pd-sm-40">
+  <h6 class="card-body-title">Project Table</h6>
+  <p class="mg-b-20 mg-sm-b-30"></p>
 
-  <h2>Project List</h2>
-  {% if projects %}
-    <ul>
-      {% for project in projects %}
-        <li><a href="{% url 'App_Project:project_detail' project.pk %}">{{ project.name }}</a></li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No projects found.</p>
-  {% endif %}
-
+  <div class="table-responsive">
+    <table class="table mg-b-0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Initialize</th>
+          <th>Deadline</th>
+          <th>Manager</th>
+          <th>View Project</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if projects %}
+        {% for project in projects %}
+        <tr>
+          <td>{{ project.name }}</td>
+          <td>{{ project.start_date }}</td>
+          <td>{{ project.end_date }}</td>
+          <td>{{ project.manager }}</td>
+          <td>            
+             <button class="btn btn-sm btn-secondary">
+              <a class="text-white" href="{% url 'App_Project:project_detail' project.pk %}"><i class="fa fa-eye" ></i>View</a>
+             </button>  
+          </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr><td>No Projects Found.</td> </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div><!-- card -->
 {% endblock body_block %}
+
+
+
