@@ -1,46 +1,46 @@
 {% load static %}   
    <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo"><a href=""><i class="icon ion-clipboard text-white"></i> TMS </a></div>
+    <div class="sl-logo"><a href="{% url 'App_User:home' %}"><i class="icon ion-clipboard text-warning"></i><b class="text-warning tx-22"> TMS </b></a></div>
     <div class="sl-sideleft">
-      <div class="input-group input-group-search">
+      <!-- <div class="input-group input-group-search">
         <input type="search" name="search" class="form-control" placeholder="Search">
         <span class="input-group-btn">
           <button class="btn"><i class="fa fa-search"></i></button>
-        </span><!-- input-group-btn -->
-      </div><!-- input-group -->
+        </span>
+      </div> -->
 
-      <label class="sidebar-label">Navigation</label>
+      <label class="sidebar-label text-warning">Side Nav Menu</label>
       <div class="sl-sideleft-menu">
-        <a href="" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Dashboard</span>
+        <a href="{% url 'App_User:home' %}" class="sl-menu-link text-warning">
+          <div class="sl-menu-item tx-15">
+            <i class="menu-item-icon icon ion-ios-home-outline tx-22" ></i>
+            <span class="menu-item-label tx-20">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
+        <a href="#" class="sl-menu-link text-warning">
+          <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label text-white">User Log</span>
+            <span class="menu-item-label tx-20">User Log</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
+        <a href="" class="sl-menu-link text-warning">
+          <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Workspace</span>
+            <span class="menu-item-label tx-20">Workspace</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{% url 'App_Project:create_project' %}" class="nav-link">Create</a></li>
+          <li class="nav-item"><a href="{% url 'App_Project:create_project' %}" class="nav-link">Create Project</a></li>
           <li class="nav-item"><a href="{% url 'App_Project:project_list' %}" class="nav-link">Project List</a></li>
           <li class="nav-item"><a href="" class="nav-link">Add Employee</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Project-4</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Project-5</a></li>
         </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
+        <a href="#" class="sl-menu-link text-warning">
+          <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-            <span class="menu-item-label">Task Form</span>
+            <span class="menu-item-label tx-20">Task Form</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -51,20 +51,20 @@
           <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
           <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li> -->
         </ul>
-        <a href="" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
+        <a href="" class="sl-menu-link text-warning">
+          <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">Settings</span>
+            <span class="menu-item-label tx-22">Settings</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div>
         </a>
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="" class="nav-link">Accordion</a></li>
         </ul>
-        <a href="" class="sl-menu-link">
-          <div class="sl-menu-item text-white">
+        <a href="" class="sl-menu-link text-warning">
+          <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-            <span class="menu-item-label">Report</span>
+            <span class="menu-item-label tx-22">Report</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->

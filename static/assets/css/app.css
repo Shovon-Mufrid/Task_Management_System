@@ -12137,11 +12137,16 @@ textarea.parsley-success:focus {
   transition: all 0.2s ease-in-out;
 }
 
+
 .menu-item-label {
   white-space: nowrap;
   margin-left: 10px;
   margin-right: auto;
 }
+.menu-item-label:hover {
+  color: black;
+  background: #fff;
+ }
 
 .menu-item-label,
 .menu-item-arrow {

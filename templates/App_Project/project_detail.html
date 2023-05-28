@@ -5,7 +5,7 @@
 {% endblock span_block %} 
 {% block body_block %}
 
-<div class="row mg-b-20">
+<div class="row mg-b-50">
   <div class="col-xl-6">
     <div class="card pd-20 pd-sm-40">
       <h2 class="card-body-title">{{ project.name }}</h2>
@@ -15,13 +15,23 @@
     </div>
   </div>
   <div class="col-xl-6">
-    <div class="card pd-20 pd-sm-40">
-      <h2 class="card-body-title">{{ project.name }}</h2>
-      <p>Description: {{ project.description }}</p>
-      <p>Start Date: {{ project.start_date }}</p>
-      <p>End Date: {{ project.end_date }}</p>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card pd-20 pd-sm-40">
+          <h2 class="card-body-title">Time Frame</h2>
+        </div>
+      </div>
     </div>
+    <div class="row mt-3 align-left">
+      <div class="col-xl-12">
+        <div class="">
+          <h2 class="card-body-title"><button class="btn-lg btn-primary"><a class="text-white" href="{% url 'App_Project:create_task' project.pk %}">Create A Task</a></button></h2>
+        </div>
+      </div>
+    </div>
+    
   </div>
+
 </div>
 
 <!-- TASK STATUS -->
@@ -112,11 +122,32 @@
   {% endif %}
 </div> -->
 
-<button><a href="{% url 'App_Project:create_task' project.id %}">ADD Task</a></button>
-
 <div class="row row-sm mg-t-20">
- 
+  {% for task in project.tasks.all %}
   <div class="col-md-6 col-xl-4 mg-t-20 mg-xl-t-0">
+    <div class="card pd-20 pd-sm-25 bg-sl-primary">
+      <div class="d-flex justify-content-between align-items-center mg-b-15">
+        <h6 class="card-body-title tx-white tx-12 mg-b-5">{{ task.name }}</h6>
+        <p class="tx-13 mg-b-0">{{ task.start_date }} To {{ task.end_date }}</p>
+      </div>
+      <div class="bg-black-2 text-white">
+        <div id="rickshaw3" class="wd-100p ht-100 text-white">
+         
+          <h2></h2>
+          <p>{{ task.description }}</p>
+          <p></p>
+          <p></p>
+          
+          <hr>
+        
+        </div>
+        <p>{{ task.status }}</p>
+      </div>
+     <button class="btn-sm btn-secondary"><a class="text-white" href="{% url 'App_Project:edit_task' project.pk %}">Update Task</a></button>
+    </div>
+  </div>
+  {% endfor %}
+  <!-- <div class="col-md-6 col-xl-4 mg-t-20 mg-xl-t-0">
     <div class="card pd-20 pd-sm-25 bg-sl-primary">
       <div class="d-flex justify-content-between align-items-center mg-b-15">
         <h6 class="card-body-title tx-white tx-12 mg-b-5">Task</h6>
@@ -138,11 +169,9 @@
         <p>No tasks found for this project.</p>
         {% endif %}
       </div>
-      <!-- row -->
     </div>
-    <!-- card -->
-  </div>
-  <!-- col-4 -->
+  </div> -->
+
 </div>
 
 {% endblock body_block %}

@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block span_block %}
+    Update Task
+{% endblock span_block %}
+    
+{% block body_block %}
+  <div class="card pd-20 pd-sm-40">
+    <div class="row">
+        <div class="col-sm-3">
+           <h3 class="">Update Task </h3>
+           <button class="mg-l-8 mg-b-20 mg-sm-b-30 btn btn-sm btn-secondary" >Print It</button>
+         </div>
+    </div>
+  
+
+  <form action="" method="POST">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">Update Task</button>
+            <button type="submit" class="btn btn-danger"><a class="text-white" href="{% url 'App_Project:delete_task' project.pk %}"></a> Delete Task</button>
+        </div>
+    </div>   
+  </form>
+</div>
+{% endblock %}

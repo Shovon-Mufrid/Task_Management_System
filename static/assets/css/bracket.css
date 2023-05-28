@@ -3091,7 +3091,7 @@ tbody.collapse.show {
   border-radius: 3px;
 }
 .nav-pills .nav-link.active, .show > .nav-pills .nav-link {
-  color: #fff;
+  color: #000000;
   background-color: #0866C6;
 }
 
@@ -16015,10 +16015,15 @@ textarea.parsley-success:focus {
   margin-left: 10px;
   margin-right: auto;
 }
+.menu-item-label:hover {
+ color: #000;
+ background: #fff;
+}
 
 .menu-item-label,
 .menu-item-arrow {
   transition: all 0.2s ease-in-out;
+  color: #384250;
 }
 
 .br-menu-sub {
@@ -16032,7 +16037,7 @@ textarea.parsley-success:focus {
 }
 .br-menu-sub .nav-link {
   font-size: 13px;
-  color: #adb5bd;
+  color: #384250;
   padding-top: 7px;
   padding-bottom: 7px;
   white-space: nowrap;

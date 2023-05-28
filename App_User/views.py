@@ -31,12 +31,15 @@ def user_logout(request):
 def home(request):
     return render(request, 'App_User/home.html')
 
-@login_required
-def profile(request):
-    user = request.user
-    profile = UserProfile.objects.get(user=user)
-    return render(request, 'App_User/profile.html', {'user': user, 'profile': profile})
+# @login_required
+# def profile(request):
+#     user = request.user
+#     profile = UserProfile.objects.get(user=user)
+#     return render(request, 'App_User/profile.html', {'user': user, 'profile': profile})
 
+def profile(request):
+    user = User.objects.get(username=request.user.username)
+    return render(request, 'App_User/profile.html', {'user': user})
 
 # @login_required
 # def profile_view(request):

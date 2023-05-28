@@ -123,12 +123,31 @@ def delete_project(request, pk):
 
 
 
+# @login_required
+# def create_task(request, pk):
+#     """
+#     Allows the admin or project manager to create a new task for a project
+#     """
+#     project = get_object_or_404(Project, pk=pk)
+
+#     if request.method == 'POST':
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             task = form.save(commit=False)
+#             task.project = project
+#             task.save()
+#             form.save_m2m()
+#             messages.success(request, 'Task created successfully')
+#             return redirect('App_Project:project_detail', pk=pk)
+#     else:
+#         form = TaskForm()
+
+#     context = {'form': form, 'project': project}
+#     return render(request, 'App_Project/create_task.html', context)
+
 @login_required
-def create_task(request, pk):
-    """
-    Allows the admin or project manager to create a new task for a project
-    """
-    project = get_object_or_404(Project, pk=pk)
+def create_task(request, project_pk):
+    project = get_object_or_404(Project, pk=project_pk)
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -136,15 +155,13 @@ def create_task(request, pk):
             task = form.save(commit=False)
             task.project = project
             task.save()
-            form.save_m2m()
             messages.success(request, 'Task created successfully')
-            return redirect('App_Project:project_detail', pk=pk)
+            return redirect('App_Project:project_detail', pk=project.pk)
     else:
         form = TaskForm()
 
     context = {'form': form, 'project': project}
     return render(request, 'App_Project/create_task.html', context)
-
 
 @login_required
 def edit_task(request, pk):
