@@ -12,3 +12,4 @@
 8. Run: python manage.py runserver
 9. User Access: username: admin password: admin123
 10. Access to django admin: http://127.0.0.1:8000/admin
+11. E1> U: shovon | P:mufrid123

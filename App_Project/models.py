@@ -71,10 +71,20 @@ class WorkingTask(models.Model):
     def __str__(self):
         return self.task.name
 
+class EmployeeProject(models.Model):
+    employees = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.employees} - {self.project}'
+
+
 class EmployeeTask(models.Model):
+    employee_project = models.ForeignKey(EmployeeProject, on_delete=models.CASCADE)
     employees = models.ForeignKey(Employee, on_delete=models.CASCADE)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.employee} - {self.task}'
+        return f'{self.employees} - {self.task}'

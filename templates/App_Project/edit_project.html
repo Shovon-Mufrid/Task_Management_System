@@ -1,14 +1,20 @@
 {% extends 'layouts/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block span_block %}
-    Dashboard
+    Update
 {% endblock span_block %}
 
 {% block body_block %}
-<h2>Edit Project</h2>
-  <form method="post">
+<div class="card pd-20 pd-sm-40">
+  <h6 class="card-body-title">Update Project</h6>
+  <p class="mg-b-20 mg-sm-b-30"></p>
+
+  <form action="" method="POST">
+    {{ form|crispy }}
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <br>
+    <button type="submit" class="btn btn-secondary">Update Project</button>
   </form>
+</div>>  
 {% endblock body_block %}
+

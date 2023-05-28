@@ -6,8 +6,12 @@
 
 {% block body_block %}
 <div class="card pd-20 pd-sm-40">
-  <h6 class="card-body-title">Project Table</h6>
-  <p class="mg-b-20 mg-sm-b-30"></p>
+  <h3 class="card-body-title"><h1 class="text-dark">Project Table</h1></h3>
+  <div>
+    <h4 class="mt-3 mg-b-20 mg-sm-b-30">Create New Project <button class=" btn btn-sm btn-secondary ml-2"><a class="text-white" href="{% url 'App_Project:create_project' %}">Add</a>   </button>  
+    </h4> 
+  </div>
+ 
 
   <div class="table-responsive">
     <table class="table mg-b-0">
@@ -17,7 +21,7 @@
           <th>Initialize</th>
           <th>Deadline</th>
           <th>Manager</th>
-          <th>View Project</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -29,9 +33,16 @@
           <td>{{ project.end_date }}</td>
           <td>{{ project.manager }}</td>
           <td>            
-             <button class="btn btn-sm btn-secondary">
-              <a class="text-white" href="{% url 'App_Project:project_detail' project.pk %}"><i class="fa fa-eye" ></i>View</a>
-             </button>  
+             <button class="btn btn-sm btn-dark">
+              <a class="text-white" href="{% url 'App_Project:project_detail' project.pk %}"><i class="fa fa-eye" ></i> View</a>
+             </button> 
+             <button class="btn btn-sm btn-primary">
+              <a class="text-white" href="{% url 'App_Project:update_project' project.pk %}"><i class="icon ion-edit" ></i> Edit</a>
+             </button> 
+             <button class="btn btn-sm btn-danger">
+              <a class="text-white" href="{% url 'App_Project:delete_project' project.pk %}"><i class="icon ion-trash-a" ></i> Delete</a>
+             </button> 
+              
           </td>
         </tr>
         {% endfor %}

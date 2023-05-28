@@ -1,26 +1,148 @@
-{% extends 'layouts/base.html' %}
-
-{% block span_block %}
-    Dashboard
-{% endblock span_block %}
-    
+{% extends 'layouts/base.html' %} 
+{% load crispy_forms_tags %} 
+{% block span_block %} 
+{{ project.name }} 
+{% endblock span_block %} 
 {% block body_block %}
-<div class="card pd-20 pd-sm-40">
-  <h2 class="card-body-title">{{ project.name }}</h2>
-  <p>Description: {{ project.description }}</p>
-  <p>Start Date: {{ project.start_date }}</p>
-  <p>End Date: {{ project.end_date }}</p>
-</div>  
 
+<div class="row mg-b-20">
+  <div class="col-xl-6">
+    <div class="card pd-20 pd-sm-40">
+      <h2 class="card-body-title">{{ project.name }}</h2>
+      <p>Description: {{ project.description }}</p>
+      <p>Start Date: {{ project.start_date }}</p>
+      <p>End Date: {{ project.end_date }}</p>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card pd-20 pd-sm-40">
+      <h2 class="card-body-title">{{ project.name }}</h2>
+      <p>Description: {{ project.description }}</p>
+      <p>Start Date: {{ project.start_date }}</p>
+      <p>End Date: {{ project.end_date }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- TASK STATUS -->
+<div class="row row-sm mg-t-20">
+  <div class="col-sm-6 col-xl-3">
+    <div class="card pd-20 pd-sm-25 bg-primary">
+      <div class="d-flex align-items-center justify-content-between mg-b-10">
+        <h6 class="card-body-title tx-12 tx-spacing-1">Assigned Task</h6>
+        <a href="" class="tx-gray-600 hover-info"
+          ><i class="icon ion-more"></i
+        ></a>
+      </div>
+      <!-- d-flex -->
+      <h2 class="tx-white tx-lato tx-center mg-b-15">21</h2>
+      <p class="mg-b-0 tx-12 tx-white"><span class="tx-success"></span> Date</p>
+    </div>
+    <!-- card -->
+  </div>
+  <!-- col-3 -->
+  <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
+    <div class="card bg-purple tx-white pd-25">
+      <div class="d-flex align-items-center justify-content-between mg-b-10">
+        <h6 class="card-body-title tx-12 tx-white-8 tx-spacing-1">
+          On Going Task
+        </h6>
+        <a href="" class="tx-white-8 hover-white"
+          ><i class="icon ion-more"></i
+        ></a>
+      </div>
+      <!-- d-flex -->
+      <h2 class="tx-lato tx-center mg-b-15">21</h2>
+      <p class="mg-b-0 tx-12 op-8">Date</p>
+    </div>
+    <!-- card -->
+  </div>
+  <!-- col-3 -->
+  <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+    <div class="card pd-20 pd-sm-25 bg-danger">
+      <div class="d-flex align-items-center justify-content-between mg-b-10">
+        <h6 class="card-body-title tx-12 tx-spacing-1 tx-white">
+          Incomplete Task
+        </h6>
+        <a href="" class="tx-gray-600 hover-info"
+          ><i class="icon ion-more"></i
+        ></a>
+      </div>
+      <!-- d-flex -->
+      <h2 class="tx-white tx-lato tx-center mg-b-15">2</h2>
+      <p class="mg-b-0 tx-12 tx-white">
+        <span class="tx-danger">- 3.4%</span> Date
+      </p>
+    </div>
+    <!-- card -->
+  </div>
+  <!-- col-3 -->
+  <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+    <div class="card bg-teal tx-white pd-25">
+      <div class="d-flex align-items-center justify-content-between mg-b-10">
+        <h6 class="card-body-title tx-12 tx-white-8 tx-spacing-1">
+          Completed Task
+        </h6>
+        <a href="" class="tx-white-8 hover-white"
+          ><i class="icon ion-more"></i
+        ></a>
+      </div>
+      <!-- d-flex -->
+      <h2 class="tx-lato tx-center mg-b-15">23</h2>
+      <p class="mg-b-0 tx-12 op-8">+ 6.2% compared last month</p>
+    </div>
+    <!-- card -->
+  </div>
+  <!-- col-3 -->
+</div>
+<!-- row -->
+<!-- 
 <div class="card mt-3 pd-20 pd-sm-40">
   <h2 class="card-body-title">Task</h2>
   {% if tasks %}
-    <ul>
-      {% for task in tasks %}
-        <li><a href="{% url 'App_Project:edit_task' task.pk %}">{{ task.name }}</a></li>
-      {% endfor %}
-    </ul>
+  <ul>
+    {% for task in tasks %}
+    <li>
+      <a href="{% url 'App_Project:edit_task' task.pk %}">{{ task.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
   {% else %}
-    <p>No tasks found for this project.</p>
+  <p>No tasks found for this project.</p>
   {% endif %}
+</div> -->
+
+<button><a href="{% url 'App_Project:create_task' project.id %}">ADD Task</a></button>
+
+<div class="row row-sm mg-t-20">
+ 
+  <div class="col-md-6 col-xl-4 mg-t-20 mg-xl-t-0">
+    <div class="card pd-20 pd-sm-25 bg-sl-primary">
+      <div class="d-flex justify-content-between align-items-center mg-b-15">
+        <h6 class="card-body-title tx-white tx-12 mg-b-5">Task</h6>
+        <p class="tx-13 mg-b-0">Start Date To End Date</p>
+      </div>
+      <div class="bg-black-2">
+        <div id="rickshaw3" class="wd-100p ht-100"></div>
+      </div>
+      <div class="row no-gutters mg-t-1">
+        {% if tasks %}
+        <ul>
+          {% for task in tasks %}
+          <li>
+            <a href="#">{{ task.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No tasks found for this project.</p>
+        {% endif %}
+      </div>
+      <!-- row -->
+    </div>
+    <!-- card -->
+  </div>
+  <!-- col-4 -->
+</div>
+
 {% endblock body_block %}

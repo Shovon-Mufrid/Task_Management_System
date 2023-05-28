@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block span_block %}
+   Add Employee
+{% endblock span_block %}
+    
+{% block body_block %}
+  <div class="card pd-20 pd-sm-40">
+  <h6 class="card-body-title">Add Employee</h6>
+  <p class="mg-b-20 mg-sm-b-30"></p>
+
+  <form action="" method="POST">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <br>
+    <button type="submit" class="btn btn-secondary">Add Employee</button>
+  </form>
+  
+  <!-- <div class="form-group mg-b-10-force"></div>
+   {{ form.as_p }}
+  </div> -->
+
+  
+</div>
+
+{% endblock %}
