@@ -143,7 +143,7 @@
         </div>
         <p>{{ task.status }}</p>
       </div>
-     <button class="btn-sm btn-secondary"><a class="text-white" href="{% url 'App_Project:edit_task' project.pk %}">Update Task</a></button>
+     <button class="btn-sm btn-secondary"><a class="text-white" href="{% url 'App_Project:edit_task' pk=task.pk %}">Update Task</a></button>
     </div>
   </div>
   {% endfor %}
