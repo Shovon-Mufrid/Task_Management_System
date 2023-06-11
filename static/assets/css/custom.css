@@ -1,4 +1,7 @@
 /* styles.css */
+*{
+  cursor: pointer;
+}
 
 .container {
   max-width: 500px;

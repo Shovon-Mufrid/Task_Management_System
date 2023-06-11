@@ -97,30 +97,12 @@
           ><i class="icon ion-more"></i
         ></a>
       </div>
-      <!-- d-flex -->
       <h2 class="tx-lato tx-center mg-b-15">23</h2>
       <p class="mg-b-0 tx-12 op-8">+ 6.2% compared last month</p>
     </div>
-    <!-- card -->
   </div>
-  <!-- col-3 -->
 </div>
-<!-- row -->
-<!-- 
-<div class="card mt-3 pd-20 pd-sm-40">
-  <h2 class="card-body-title">Task</h2>
-  {% if tasks %}
-  <ul>
-    {% for task in tasks %}
-    <li>
-      <a href="{% url 'App_Project:edit_task' task.pk %}">{{ task.name }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>No tasks found for this project.</p>
-  {% endif %}
-</div> -->
+
 
 <div class="row row-sm mg-t-20">
   {% for task in project.tasks.all %}

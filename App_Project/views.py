@@ -183,6 +183,18 @@ def edit_task(request, pk):
     context = {'form': form, 'project': project, 'task': task}
     return render(request, 'App_Project/edit_task.html', context)
 
+@login_required
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    project_pk = task.project.pk  # Retrieve the project's primary key for redirection
+
+    if request.method == 'POST':
+        task.delete()
+        messages.success(request, 'Task has been deleted successfully!')
+        return redirect('App_Project:project_detail', pk=project_pk)
+
+    context = {'task': task}
+    return render(request, 'App_Project/delete_task.html', context)
 
 @login_required
 def assign_task(request, pk):

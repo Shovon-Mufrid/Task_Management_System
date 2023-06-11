@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block body_block %}
+<div class="row mt-5 mg-b-20">
+    <div class="col-xl-4">
+
+    </div>
+    <div class="col-xl-4">
+      <div class="card pd-20 pd-sm-40">
+          <h2>Delete Task</h2>
+            <p>Are you sure you want to delete the task "{{ task.name }}"?</p>
+
+            <form action="{% url 'App_Project:delete_task' task.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>   
+    </div>
+    <div class="col-xl-4">
+
+    </div>
+</div>
+</div>
+
+{% endblock body_block %}
+    

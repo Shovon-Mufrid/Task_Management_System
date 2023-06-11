@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-sm-3">
             <button type="submit" class="btn btn-primary">Update Task</button>
-            <button type="submit" class="btn btn-danger"><a class="text-white" href="{% url 'App_Project:delete_task' project.pk %}"></a> Delete Task</button>
+            <button type="submit" class="btn btn-danger"><a class="text-white" href="{% url 'App_Project:delete_task' task.pk %}">Delete Task</a></button>
         </div>
     </div>   
   </form>
