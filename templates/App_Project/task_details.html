@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %} 
+
+{% block body_block %}
+<div class="row mg-b-50">
+    <div class="col">
+        <div class="card pd-20 pd-sm-40">
+            <h1>Task Details</h1> 
+            <div class="row">
+                <div class="col-sm-3">
+                    <button onclick="printTaskDetails()" class="btn btn-sm btn-secondary">Print</button>
+                </div>
+            </div>
+            <h5 class="mt-3">{{ task.name }}</h5>
+            <p>Description: {{ task.description }}</p>
+            <p>Start Date: {{ task.start_date }}</p>
+            <p>End Date: {{ task.end_date }}</p>
+            <p>Status: {{ task.status }}</p>
+            {% for employee in task.assigned_to.all %}
+            <p>Assigned Employee: {{ employee.user.username|capfirst }} </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function printTaskDetails() {
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Task Details</title></head><body>');
+        printWindow.document.write('<div class="card pd-20 pd-sm-40">');
+        printWindow.document.write('<h1>Task Detail</h1>');
+        printWindow.document.write('<h5 class="mt-3">' + '{{ task.name }}' + '</h5>');
+        printWindow.document.write('<p>Description: ' + '{{ task.description }}' + '</p>');
+        printWindow.document.write('<p>Start Date: ' + '{{ task.start_date }}' + '</p>');
+        printWindow.document.write('<p>End Date: ' + '{{ task.end_date }}' + '</p>');
+        printWindow.document.write('<p>Status: ' + '{{ task.status }}' + '</p>');
+        printWindow.document.write('{% for employee in task.assigned_to.all %}');
+        printWindow.document.write('<p>Assigned Employee: ' + '{{ employee.user.username }}' + '</p>');
+        printWindow.document.write('{% endfor %}');
+        printWindow.document.write('</div>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+<!-- <script>
+    function printTaskDetails() {
+        window.print();
+    }
+</script> -->
+
+{% endblock body_block %}

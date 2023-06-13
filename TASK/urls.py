@@ -7,7 +7,7 @@ from App_User import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("App_User.urls")),
-    # path('userlog/', include('App_Userlog.urls')),
+    path('userlog/', include('App_Userlog.urls')),
     path('project/', include('App_Project.urls')),
     
 ]

@@ -240,3 +240,23 @@ def tasks_by_status(request, status):
 #     return render(request, 'App_Project/tasks_by_status.html', context)
 
 
+
+def task_details(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    context = {'task': task}
+    return render(request, 'App_Project/task_details.html', context)
+
+# def add_employees_to_task(request, task_id):
+#     task = get_object_or_404(Task, pk=task_id)
+#     if request.method == 'POST':
+#         # form = TaskForm(request.POST, instance=task)
+#         form = EmployeeTaskForm(request.POST)
+#         if form.is_valid():
+#             employee_task = form.save(commit=False)
+#             employee_task.task = task
+#             employee_task.save()
+#             return redirect('App_Project:task_details', task_id=task_id)
+#     else:
+#          form = EmployeeTaskForm()
+#     context = {'form': form, 'task': task}
+#     return render(request, 'App_Project/add_employees_to_task.html', context)

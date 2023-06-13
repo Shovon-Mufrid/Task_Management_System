@@ -17,12 +17,12 @@
             <span class="menu-item-label tx-20">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link text-warning">
+        <!-- <a href="#" class="sl-menu-link text-warning">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label tx-20">User Log</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+          </div>
+        </a> -->
         <a href="" class="sl-menu-link text-warning">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -33,9 +33,6 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{% url 'App_Project:create_project' %}" class="nav-link">Create Project</a></li>
           <li class="nav-item"><a href="{% url 'App_Project:project_list' %}" class="nav-link">Project List</a></li>
-          <li class="nav-item"><a href="" class="nav-link">Add Employee</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Project-4</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Project-5</a></li>
         </ul>
         <a href="#" class="sl-menu-link text-warning">
           <div class="sl-menu-item">
@@ -46,10 +43,6 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="" class="nav-link">Task Added</a></li>
-          <!-- <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-          <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-          <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-          <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li> -->
         </ul>
         <a href="" class="sl-menu-link text-warning">
           <div class="sl-menu-item">
@@ -68,9 +61,10 @@
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link">Project Table</a></li>
-          <!-- <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li> -->
+        <ul class="sl-menu-sub nav flex-column"> 
+          <li class="nav-item">
+            <a href="{% url 'App_Userlog:userlog' %}" class="nav-link">Userlog</a>
+          </li>
         </ul>
       </div><!-- sl-sideleft-menu -->
 

@@ -8,10 +8,11 @@
 <div class="row mg-b-50">
   <div class="col-xl-6">
     <div class="card pd-20 pd-sm-40">
-      <h2 class="card-body-title">{{ project.name }}</h2>
+      <h2 class="">Project Name: <span class="text-primary"> {{ project.name }}</span></h2> 
       <p>Description: {{ project.description }}</p>
       <p>Start Date: {{ project.start_date }}</p>
       <p>End Date: {{ project.end_date }}</p>
+      <p>Project Manager: {{ project.manager|capfirst  }}</p>
       <button class="btn-lg btn-primary"><a class="text-white" href="{% url 'App_Project:create_task' project.pk %}">Create A Task</a></button>
     </div>
   </div>
@@ -20,14 +21,7 @@
       <div class="col-xl-12">
         <div class="card pd-20 pd-sm-40">
           <h2 class="card-body-title">Time Frame</h2>
-          <h2>Tasks</h2>
-          <ul>
-            <!-- Display other task details -->
-            <li><a href="{% url 'App_Project:tasks_by_status' 'WORKING' %}">View Working Tasks</a></li>
-            <li><a href="{% url 'App_Project:tasks_by_status' 'ASSIGNED' %}">View Assigned Tasks</a></li>
-            <li><a href="{% url 'App_Project:tasks_by_status' 'COMPLETED' %}">View Completed Tasks</a></li>
-            <li><a href="{% url 'App_Project:tasks_by_status' 'INCOMPLETED' %}">View Incompleted Tasks</a></li>
-          </ul>
+
         </div>
       </div>
     </div>
@@ -38,7 +32,7 @@
   <div class="col-sm-6 col-xl-3">
     <div class="card pd-20 pd-sm-25 bg-primary">
       <div class="d-flex align-items-center justify-content-between mg-b-10">
-        <h6 class="card-body-title tx-12 tx-spacing-1">Assigned Task</h6>
+        <h6 class="card-body-title tx-12 tx-white-8 tx-spacing-1">Assigned Task</h6>
         <a href="{% url 'App_Project:tasks_by_status' 'ASSIGNED' %}" class="btn btn-lg tx-white hover-warning"
         ><i class="fa fa-compass"></i
         ></a>
@@ -108,7 +102,9 @@
   <div class="col-md-6 col-xl-4 mg-t-20 mg-xl-t-0">
     <div class="card pd-20 pd-sm-25 bg-sl-primary">
       <div class="d-flex justify-content-between align-items-center mg-b-15">
-        <h6 class="card-body-title tx-white tx-12 mg-b-5">{{ task.name }}</h6>
+        <h3 class="card-body-title tx-white mg-b-5">{{ task.name }}</h3> 
+        <button class="btn btn-sm bg-secondary"><a class="text-white" href="{% url 'App_Project:task_details' task_id=task.id %}">View Task</a></button>
+
         <p class="tx-13 mg-b-0">{{ task.start_date }} To {{ task.end_date }}</p>
       </div>
       <div class="bg-black-2 text-white">
@@ -116,15 +112,20 @@
          
           <h2></h2>
           <p>{{ task.description }}</p>
-          <p></p>
-          <p></p>
-          
-          <hr>
-        
         </div>
-        <p>{{ task.status }}</p>
+        <hr>
+        <div class="row mg-b-6">
+          <div class="col-sm-6">
+            {% for employee in task.assigned_to.all %}
+             Assigned To: {{ employee.user.username|capfirst }}
+            {% endfor %}   
+          </div>
+          <div class="col-sm-6">
+            Status: {{ task.status }}
+          </div>
+        </div>  
       </div>
-     <button class="btn-sm btn-secondary"><a class="text-white" href="{% url 'App_Project:edit_task' pk=task.pk %}">Update Task</a></button>
+     <button class="btn-sm btn-warning"><a class="text-white" href="{% url 'App_Project:edit_task' pk=task.pk %}">Update Task</a></button>
     </div>
   </div>
   {% endfor %}

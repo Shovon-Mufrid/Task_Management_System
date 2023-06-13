@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %} 
+
+{% block body_block %}
+
+    <h1>Add Employees to Task</h1>
+    <h2>{{ task.name }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Employees">
+    </form>
+
+{% endblock body_block %}    

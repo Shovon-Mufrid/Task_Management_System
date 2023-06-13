@@ -15,5 +15,7 @@ urlpatterns = [
     # path('tasks/<str:status>/', views.view_tasks_by_status, name='view_tasks_by_status'),
     # path('tasks/status/<str:status>/', views.view_tasks_by_status, name='view_tasks_by_status'),
     path('task/tasks-by-status/<str:status>/', views.tasks_by_status, name='tasks_by_status'),
+    path('task/<int:task_id>/', views.task_details, name='task_details'),
+    # path('task/<int:task_id>/add_employees/', views.add_employees_to_task, name='add_employees_to_task'),
 
 ]

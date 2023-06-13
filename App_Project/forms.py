@@ -39,10 +39,8 @@ class EmployeeProjectForm(forms.ModelForm):
 class EmployeeTaskForm(forms.ModelForm):
     class Meta:
         model = EmployeeTask
-        fields = ('__all__')
+        fields = ['employees']
         
-        
-
 class AssignTaskForm(forms.Form):
     employees = forms.ModelMultipleChoiceField(
         queryset=Employee.objects.all(),

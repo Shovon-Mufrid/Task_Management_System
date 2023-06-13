@@ -1,8 +1,8 @@
-# from django.urls import path
-# from App_Userlog import views
+from django.urls import path
+from App_Userlog import views
 
-# app_name = 'App_Userlog'
+app_name = 'App_Userlog'
 
-# urlpatterns = [
-#   path('log/', views.user_log, name='userlog'),
-#     ]
+urlpatterns = [
+  path('log/', views.user_log, name='userlog'),
+    ]

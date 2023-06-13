@@ -31,29 +31,8 @@ def user_logout(request):
 def home(request):
     return render(request, 'App_User/home.html')
 
-# @login_required
-# def profile(request):
-#     user = request.user
-#     profile = UserProfile.objects.get(user=user)
-#     return render(request, 'App_User/profile.html', {'user': user, 'profile': profile})
 
 def profile(request):
     user = User.objects.get(username=request.user.username)
     return render(request, 'App_User/profile.html', {'user': user})
 
-# @login_required
-# def profile_view(request):
-#     profiles = request.user.profile
-#     return render(request, 'App_User/profile.html', context={'profiles': profiles})
-
-# @login_required
-# def edit_profile(request):
-#     current_user =  Profile.objects.get(user=request.user)
-#     form = UserProfileForm(instance=current_user)
-#     if request.method == 'POST':
-#         form = UserProfileForm(request.POST, request.FILES, instance=current_user)
-#         if form.is_valid():
-#             form.save(commit=True)
-#             form = UserProfileForm(instance=current_user)
-#             return HttpResponseRedirect(reverse('App_User:profile'))
-#     return render(request, "App_User/profile_edit.html", context={'form': form})  
