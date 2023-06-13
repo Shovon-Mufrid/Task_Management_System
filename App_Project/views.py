@@ -1,22 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
-from .models import Project, Task, EmployeeTask
+from .models import Project, Task, EmployeeTask, CompletedTask, IncompletedTask, AssignedTask, WorkingTask
 from App_User.models import Employee
 from .forms import ProjectForm, TaskForm, EmployeeTaskForm, AssignTaskForm
 from django.core.exceptions import PermissionDenied
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, View, TemplateView, DeleteView
-
-# @login_required
-# def project_list(request):
-#     """
-#     Displays the list of projects for the logged in user
-#     """
-#     projects = Project.objects.filter(employees=request.user.employee)
-
-#     context = {'projects': projects}
-#     return render(request, 'App_Project/project_list.html', context)
 
 class ProjectList(ListView):
     context_object_name = 'projects'
@@ -32,8 +23,17 @@ def project_detail(request, pk):
     project = get_object_or_404(Project, pk=pk)
 
     tasks = Task.objects.filter(project=project)
+    assigned_count = project.tasks.filter(status='ASSIGNED').count()
+    working_count = project.tasks.filter(status='WORKING').count()
+    completed_count = project.tasks.filter(status='COMPLETED').count()
+    incompleted_count = project.tasks.filter(status='INCOMPLETED').count()
 
-    context = {'project': project, 'tasks': tasks}
+    context = {'project': project, 'tasks': tasks,
+                'assigned_count': assigned_count,
+                'working_count': working_count,
+                'completed_count': completed_count,
+                'incompleted_count': incompleted_count
+               }
     return render(request, 'App_Project/project_detail.html', context)
 
 
@@ -87,64 +87,6 @@ def delete_project(request, pk):
     messages.success(request, 'Project has been deleted successfully!')
     return redirect('App_Project:project_list')
 
-# @login_required
-# def add_employee_to_project(request, pk):
-#     project = get_object_or_404(Project, pk=pk)
-#     if request.method == 'POST':
-#         form = EmployeeTaskForm(request.POST)
-#         if form.is_valid():
-#             employee_task = form.save(commit=False)
-#             employee_task.project = project
-#             employee_task.save()
-#             messages.success(request, 'Employee has been added to project successfully!')
-#             return redirect('App_Project:project_detail', pk=project.pk)
-#     else:
-#         form = EmployeeTaskForm()
-#     return render(request, 'App_Project/add_employee.html', {'form': form, 'project': project})
-
-
-# @login_required
-# def add_employee_to_project(request, project_id):
-#     project = get_object_or_404(Project, id=project_id)
-
-#     if request.method == 'POST':
-#         employees = request.POST.getlist('employees')
-#         for employee in employees:
-#             EmployeeTask.objects.create(employees=Employee.objects.get(id=employee), task=project)
-#         messages.success(request, 'Employees added to the project successfully')
-#         return redirect('App_Project:project_detail', pk=project.pk)
-
-#     context = {
-#         'project': project,
-#         'employees': Employee.objects.all(),  # Or you can customize this queryset as per your needs
-#     }
-#     return render(request, 'App_Project/add_employee_to_project.html', context)
-
-
-
-
-# @login_required
-# def create_task(request, pk):
-#     """
-#     Allows the admin or project manager to create a new task for a project
-#     """
-#     project = get_object_or_404(Project, pk=pk)
-
-#     if request.method == 'POST':
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             task = form.save(commit=False)
-#             task.project = project
-#             task.save()
-#             form.save_m2m()
-#             messages.success(request, 'Task created successfully')
-#             return redirect('App_Project:project_detail', pk=pk)
-#     else:
-#         form = TaskForm()
-
-#     context = {'form': form, 'project': project}
-#     return render(request, 'App_Project/create_task.html', context)
-
 @login_required
 def create_task(request, project_pk):
     project = get_object_or_404(Project, pk=project_pk)
@@ -174,9 +116,14 @@ def edit_task(request, pk):
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.save() 
+            form.save_m2m() 
             messages.success(request, 'Task updated successfully')
             return redirect('App_Project:project_detail', pk=project.pk)
+            # form.save()
+            # messages.success(request, 'Task updated successfully')
+            # return redirect('App_Project:project_detail', pk=project.pk)
     else:
         form = TaskForm(instance=task)
 
@@ -234,3 +181,62 @@ def delete_task(request, pk):
             return render(request, 'App_Project/delete_task.html', {'task': task})
     else:
         raise PermissionDenied
+
+@login_required
+def tasks_by_status(request, status):
+    tasks = Task.objects.filter(status=status)
+    task_count = tasks.count()
+    return render(request, 'App_Project/tasks_by_status.html', {'tasks': tasks, 'status': status,  'task_count': task_count})
+
+
+# @login_required
+# def change_task_status(request, pk, status):
+
+#     task = get_object_or_404(Task, pk=pk)
+
+#     valid_statuses = ['completed', 'assigned', 'working', 'incompleted']
+#     if status not in valid_statuses:
+#         raise Http404
+
+#     if status == 'completed':
+#         task.status = Task.Status.COMPLETED
+#         CompletedTask.objects.create(task=task)
+#     elif status == 'assigned':
+#         task.status = Task.Status.ASSIGNED
+#         AssignedTask.objects.create(task=task)
+#     elif status == 'working':
+#         task.status = Task.Status.WORKING
+#         WorkingTask.objects.create(task=task)
+#     elif status == 'incompleted':
+#         task.status = Task.Status.INCOMPLETED
+#         IncompletedTask.objects.create(task=task)
+
+#     task.save()
+#     messages.success(request, 'Task status updated successfully')
+#     return redirect('App_Project:view_tasks_by_status', status=status)
+
+
+
+# @login_required
+# def view_tasks_by_status(request, status):
+#     """
+#     Displays tasks based on their status (Completed, Assigned, Working, Incompleted)
+#     """
+#     valid_statuses = ['completed', 'assigned', 'working', 'incompleted']
+#     if status not in valid_statuses:
+#         raise Http404
+
+#     tasks = []
+#     if status == 'completed':
+#         tasks = CompletedTask.objects.select_related('task')
+#     elif status == 'assigned':
+#         tasks = AssignedTask.objects.select_related('task')
+#     elif status == 'working':
+#         tasks = WorkingTask.objects.select_related('task')
+#     elif status == 'incompleted':
+#         tasks = IncompletedTask.objects.select_related('task')
+
+#     context = {'tasks': tasks, 'status': status}
+#     return render(request, 'App_Project/tasks_by_status.html', context)
+
+

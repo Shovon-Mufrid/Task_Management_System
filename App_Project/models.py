@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from django.contrib.auth.models import User
 from App_User.models import Employee, UserProfile
 
@@ -35,41 +36,54 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
 class CompletedTask(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    completed_by = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    completed_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.task.name
-
-
-class IncompletedTask(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.task.name
-
+    task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
 
 class AssignedTask(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.task.name
-
+    task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
 
 class WorkingTask(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
 
-    def __str__(self):
-        return self.task.name
+class IncompletedTask(models.Model):
+    task = models.OneToOneField(Task, on_delete=models.CASCADE, primary_key=True)
+
+
+
+# class CompletedTask(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+#     completed_by = models.ForeignKey(Employee, on_delete=models.CASCADE)
+#     completed_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.task.name
+
+
+# class IncompletedTask(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.task.name
+
+
+# class AssignedTask(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+#     assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.task.name
+
+
+# class WorkingTask(models.Model):
+#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
+#     assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.task.name
 
 class EmployeeProject(models.Model):
     employees = models.ForeignKey(Employee, on_delete=models.CASCADE)

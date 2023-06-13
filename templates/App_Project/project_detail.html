@@ -12,6 +12,7 @@
       <p>Description: {{ project.description }}</p>
       <p>Start Date: {{ project.start_date }}</p>
       <p>End Date: {{ project.end_date }}</p>
+      <button class="btn-lg btn-primary"><a class="text-white" href="{% url 'App_Project:create_task' project.pk %}">Create A Task</a></button>
     </div>
   </div>
   <div class="col-xl-6">
@@ -19,33 +20,31 @@
       <div class="col-xl-12">
         <div class="card pd-20 pd-sm-40">
           <h2 class="card-body-title">Time Frame</h2>
+          <h2>Tasks</h2>
+          <ul>
+            <!-- Display other task details -->
+            <li><a href="{% url 'App_Project:tasks_by_status' 'WORKING' %}">View Working Tasks</a></li>
+            <li><a href="{% url 'App_Project:tasks_by_status' 'ASSIGNED' %}">View Assigned Tasks</a></li>
+            <li><a href="{% url 'App_Project:tasks_by_status' 'COMPLETED' %}">View Completed Tasks</a></li>
+            <li><a href="{% url 'App_Project:tasks_by_status' 'INCOMPLETED' %}">View Incompleted Tasks</a></li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="row mt-3 align-left">
-      <div class="col-xl-12">
-        <div class="">
-          <h2 class="card-body-title"><button class="btn-lg btn-primary"><a class="text-white" href="{% url 'App_Project:create_task' project.pk %}">Create A Task</a></button></h2>
-        </div>
-      </div>
-    </div>
-    
   </div>
-
 </div>
-
 <!-- TASK STATUS -->
 <div class="row row-sm mg-t-20">
   <div class="col-sm-6 col-xl-3">
     <div class="card pd-20 pd-sm-25 bg-primary">
       <div class="d-flex align-items-center justify-content-between mg-b-10">
         <h6 class="card-body-title tx-12 tx-spacing-1">Assigned Task</h6>
-        <a href="" class="tx-gray-600 hover-info"
-          ><i class="icon ion-more"></i
+        <a href="{% url 'App_Project:tasks_by_status' 'ASSIGNED' %}" class="btn btn-lg tx-white hover-warning"
+        ><i class="fa fa-compass"></i
         ></a>
       </div>
       <!-- d-flex -->
-      <h2 class="tx-white tx-lato tx-center mg-b-15">21</h2>
+      <h2 class="tx-white tx-lato tx-center mg-b-15">{{ assigned_count }}</h2>
       <p class="mg-b-0 tx-12 tx-white"><span class="tx-success"></span> Date</p>
     </div>
     <!-- card -->
@@ -55,14 +54,14 @@
     <div class="card bg-purple tx-white pd-25">
       <div class="d-flex align-items-center justify-content-between mg-b-10">
         <h6 class="card-body-title tx-12 tx-white-8 tx-spacing-1">
-          On Going Task
+          Working Task
         </h6>
-        <a href="" class="tx-white-8 hover-white"
-          ><i class="icon ion-more"></i
+        <a href="{% url 'App_Project:tasks_by_status' 'WORKING' %}" class="btn btn-lg tx-white hover-warning"
+        ><i class="fa fa-compass"></i
         ></a>
       </div>
       <!-- d-flex -->
-      <h2 class="tx-lato tx-center mg-b-15">21</h2>
+      <h2 class="tx-lato tx-center mg-b-15">{{working_count}}</h2>
       <p class="mg-b-0 tx-12 op-8">Date</p>
     </div>
     <!-- card -->
@@ -74,12 +73,12 @@
         <h6 class="card-body-title tx-12 tx-spacing-1 tx-white">
           Incomplete Task
         </h6>
-        <a href="" class="tx-gray-600 hover-info"
-          ><i class="icon ion-more"></i
+        <a href="{% url 'App_Project:tasks_by_status' 'INCOMPLETED' %}" class="btn btn-lg tx-white hover-warning"
+          ><i class="fa fa-compass"></i
         ></a>
       </div>
       <!-- d-flex -->
-      <h2 class="tx-white tx-lato tx-center mg-b-15">2</h2>
+      <h2 class="tx-white tx-lato tx-center mg-b-15">{{ incompleted_count }}</h2>
       <p class="mg-b-0 tx-12 tx-white">
         <span class="tx-danger">- 3.4%</span> Date
       </p>
@@ -87,17 +86,17 @@
     <!-- card -->
   </div>
   <!-- col-3 -->
-  <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+  <div class="col-sm-6 col-xl-3 mg-t-10 mg-xl-t-0">
     <div class="card bg-teal tx-white pd-25">
       <div class="d-flex align-items-center justify-content-between mg-b-10">
         <h6 class="card-body-title tx-12 tx-white-8 tx-spacing-1">
           Completed Task
         </h6>
-        <a href="" class="tx-white-8 hover-white"
-          ><i class="icon ion-more"></i
+        <a href="{% url 'App_Project:tasks_by_status' 'COMPLETED' %}" class="btn btn-lg tx-white hover-warning"
+        ><i class="fa fa-compass"></i
         ></a>
       </div>
-      <h2 class="tx-lato tx-center mg-b-15">23</h2>
+      <h2 class="tx-lato tx-center mg-b-15">{{completed_count}}</h2>
       <p class="mg-b-0 tx-12 op-8">+ 6.2% compared last month</p>
     </div>
   </div>
