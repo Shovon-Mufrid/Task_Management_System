@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import UserProfile
+from App_Userlog.models import UserLog
+from App_Project.models import Project
+from django.core.paginator import Paginator
 
 def user_login(request):
     if request.method == 'POST':
@@ -29,10 +32,23 @@ def user_logout(request):
 
 @login_required
 def home(request):
-    return render(request, 'App_User/home.html')
+    user_log = UserLog.objects.filter(user=request.user).order_by('-timestamp')
+    paginator = Paginator(user_log, 4)
+    page = request.GET.get('page') 
+    user_logs = paginator.get_page(page)
+    projects = Project.objects.all()
+
+    context = {
+        'user_logs': user_logs,
+        'projects': projects
+    }
+    return render(request, 'App_User/home.html', context)
 
 
 def profile(request):
     user = User.objects.get(username=request.user.username)
     return render(request, 'App_User/profile.html', {'user': user})
 
+
+def handle_not_found(request,exception):
+	return render(request, "App_User/404.html")

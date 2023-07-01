@@ -3,6 +3,25 @@
 {% block span_block %} 
 {{ project.name }} 
 {% endblock span_block %} 
+
+
+{% block css_block %}
+<style>
+  .countdown-container {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #0866C6;
+        }
+</style>
+{% endblock css_block %}
+  
+
 {% block body_block %}
 
 <div class="row mg-b-50">
@@ -20,8 +39,12 @@
     <div class="row">
       <div class="col-xl-12">
         <div class="card pd-20 pd-sm-40">
-          <h2 class="card-body-title">Time Frame</h2>
-
+          <h2 class="text-danger">Deadline</h2>
+          <div class="countdown-container">
+            
+            <div id="countdown"></div>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -155,5 +178,35 @@
   </div> -->
 
 </div>
+
+
+
+<script>
+  // Countdown Timer
+  var countdownElement = document.getElementById('countdown');
+  var startDate = new Date('{{ project.start_date }}');
+  var endDate = new Date('{{ project.end_date }}');
+
+  function updateCountdown() {
+      var currentDate = new Date();
+      var remainingTime = endDate - currentDate;
+
+      if (remainingTime <= 0) {
+          countdownElement.innerHTML = "Countdown Finished!";
+          return;
+      }
+
+      var days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+
+      setTimeout(updateCountdown, 1000);
+  }
+
+  updateCountdown();
+</script>
 
 {% endblock body_block %}

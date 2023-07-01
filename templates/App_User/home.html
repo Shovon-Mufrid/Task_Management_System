@@ -5,5 +5,135 @@
 {% endblock span_block %}
     
 {% block body_block %}
-<h1>Welcome to the Admin Panel, {{user}}!</h1>
+<div class="row mg-b-20">
+  <div class="col-xl-12">
+    <div class="card pd-20">
+        <h1 class="">Welcome to the Admin Panel, {{user|capfirst }}!</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row row-sm mg-t-20">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header bg-transparent pd-20 bd-b bd-gray-200">
+        <h6 class="card-title tx-uppercase tx-12 mg-b-0">User Transaction History</h6>
+      </div><!-- card-header -->
+      <table class="table table-white table-responsive mg-b-0 tx-12">
+        <thead>
+          <tr class="tx-10">
+            <th class="pd-y-5" scope="col">#</th>
+            <th class="pd-y-5" scope="col">Action</th>
+            
+            <th class="pd-y-5" scope="col">Object Name</th>
+            <th class="pd-y-5" scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user_log in user_logs %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ user_log.action }}</td>
+                
+                <td>{{ user_log.content_object }}</td>
+                <td>{{ user_log.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="ht-80 bd d-flex align-items-center justify-content-left">
+        <nav aria-label="Page navigation">
+          <ul class="pagination pagination-basic mg-b-0">
+            {% if user_logs.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ user_logs.previous_page_number }}">
+              <span aria-hidden="true">
+                <i class="fa fa-angle-left"></i>
+             </span>
+            </a></li>
+            {% else %}
+            <li class="page-item disabled">
+                <a href="#" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">
+                        <i class="fa fa-angle-left"></i>
+                    </span>
+                </a>
+            </li>
+            {% endif %}
+      
+            {% for i in user_logs.paginator.page_range %}
+                {% if user_logs.number == i %}
+                    <li class="page-item active"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                {% else %}
+                    <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+      
+            {% if user_logs.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ user_logs.next_page_number }}" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">
+                            <i class="fa fa-angle-right"></i>
+                        </span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a href="#" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">
+                            <i class="fa fa-angle-right"></i>
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-xl-6">
+      <div class="card overflow-hidden">
+        <div class="card-header bg-transparent pd-y-20 d-sm-flex align-items-center justify-content-between">
+          <div class="mg-b-20 mg-sm-b-0">
+            <h6 class="card-title mg-b-5 tx-13 tx-uppercase tx-bold tx-spacing-1">Project Table</h6>
+            <div class="table-responsive">
+              <table class="table mg-b-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Initialize</th>
+                    <th>Deadline</th>
+                    <th>Manager</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% if projects %}
+                  {% for project in projects %}
+                  <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.start_date }}</td>
+                    <td>{{ project.end_date }}</td>
+                    <td>{{ project.manager }}</td>
+                    <td>            
+                       <button class="btn btn-sm btn-dark">
+                        <a class="text-white" href="{% url 'App_Project:project_detail' project.pk %}"><i class="fa fa-eye" ></i> View</a>
+                       </button> 
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr><td>No Projects Found.</td> </tr>
+                {% endif %}
+                </tbody>
+              </table>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 {% endblock body_block %}

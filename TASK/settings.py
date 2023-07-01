@@ -14,6 +14,7 @@ MEDIA_DIR = Path.joinpath(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-m8-lbr+f7wobboy16u@g!q^mzx47n(9a#9m7e+_1p4oe1hxdg^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'App_User', 'App_Userlog', 'App_Project',
+    'App_User', 'App_Userlog', 'App_Project', 'App_Web3',
     'crispy_forms', 'crispy_bootstrap4', 'tempus_dominus',
 ]
 

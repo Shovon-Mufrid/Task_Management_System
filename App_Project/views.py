@@ -8,6 +8,8 @@ from App_User.models import Employee
 from .forms import ProjectForm, TaskForm, EmployeeTaskForm, AssignTaskForm
 from django.core.exceptions import PermissionDenied
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, View, TemplateView, DeleteView
+# import datetime
+from datetime import datetime
 
 class ProjectList(ListView):
     context_object_name = 'projects'
@@ -28,11 +30,20 @@ def project_detail(request, pk):
     completed_count = project.tasks.filter(status='COMPLETED').count()
     incompleted_count = project.tasks.filter(status='INCOMPLETED').count()
 
+    # Countdown
+    # remaining_days = (project.end_date - datetime.date.today()).days
+    # remaining_time =  str(project.end_date - datetime.datetime.now().date())
+    # remaining_time = project.time_remaining().days * 24 * 60 * 60 
+
     context = {'project': project, 'tasks': tasks,
                 'assigned_count': assigned_count,
                 'working_count': working_count,
                 'completed_count': completed_count,
-                'incompleted_count': incompleted_count
+                'incompleted_count': incompleted_count,
+                # 'remaining_days': remaining_days,
+                # 'remaining_time': remaining_time,
+                
+            
                }
     return render(request, 'App_Project/project_detail.html', context)
 

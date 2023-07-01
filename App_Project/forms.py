@@ -5,7 +5,7 @@ from App_Project.models import Task, Project, EmployeeTask, EmployeeProject
 from App_User.models import Employee
 # from django.contrib.admin.widgets import AdminDateWidget
 from tempus_dominus.widgets import DateTimePicker
-from django.forms import DateInput
+from django.forms import DateInput, DateTimeInput
 
 
 class ProjectForm(forms.ModelForm):
@@ -17,6 +17,8 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'start_date': DateInput(attrs={'type': 'date', 'placeholder': 'YYYY-MM-DD'}),
             'end_date': DateInput(attrs={'type': 'date', 'placeholder': 'YYYY-MM-DD'}),
+            # 'start_date': DateTimeInput(attrs={'type': 'datetime-local', 'placeholder': 'YYYY-MM-DD HH:MM:SS'}),
+            # 'end_date': DateTimeInput(attrs={'type': 'datetime-local', 'placeholder': 'YYYY-MM-DD HH:MM:SS'}),
             }
         
 class TaskForm(forms.ModelForm):
