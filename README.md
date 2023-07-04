@@ -13,3 +13,4 @@
 9. User Access: username: admin password: admin123
 10. Access to django admin: http://127.0.0.1:8000/admin
 11. E1> U: shovon | P:mufrid123
+12. A2> U: prince | P:$prince@24/7
