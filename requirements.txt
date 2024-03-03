@@ -10,5 +10,5 @@ asgiref==3.6.0
 mysqlclient
 django-tempus-dominus
 web3
-django-ghuest-user
+django-guest-user
 django-jazzmin
